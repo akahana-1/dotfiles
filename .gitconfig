@@ -1,0 +1,6 @@
+[user]
+	name = akahana-1
+	email = aakahana@gmail.com
+[core]
+	autocrlf = input
+	selfcrlf = true
