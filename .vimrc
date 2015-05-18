@@ -131,7 +131,7 @@ endif
 
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 
-" User Settings
+" lightline settings
 if has('unix')
 	let g:lightline = {
 	      \ 'colorscheme': 'default',
@@ -150,6 +150,14 @@ elseif has('win32')
 		\ }
 endif
 
+" Quickrun Settings
+let g:quickrun_config ={
+\	  "_" :{
+\		"runner" : "vimproc",
+\		"runner/vimproc/updatetime" : 60
+\	  },
+\}
+
 " 256色表示に変更
 set t_Co=256
 " カラースキームを有効にする
@@ -160,11 +168,7 @@ syntax on
 " カーソル行を強調表示
 set cursorline
 " 内部エンコーディングを設定
-if has('win32')
-	set encoding=utf-8
-else
-	set encoding=utf-8
-endif
+set encoding=utf-8
 set fileencoding=utf-8
 " スワップファイルを作成しない
 set noswapfile
@@ -194,8 +198,6 @@ set clipboard=unnamedplus,unnamed
 set showmatch
 " <TAB>キーでのファイル補完を有効にする
 set wildmenu
-" 表示するフォントの設定
-" set guifont=Ricty\ 10
 " 大文字小文字を区別しない
 set ignorecase
 " 検索時は大文字小文字を区別する
