@@ -8,6 +8,8 @@ if has('win32')
 	cd $HOME
 endif
 
+let $PATH = "~/.pyenv/shims/:".$PATH
+
 " NeoBundle Settings
 if has('vim_starting')
 	filetype plugin off
@@ -43,10 +45,6 @@ NeoBundle 'Shougo/vimproc.vim', {
 			\	'linux' : 'make',
 			\	}
 			\}
-
-NeoBundleLazy 'vim-jp/cpp-vim', {
-			\ "autoload" : { "filetypes" : ["cpp"] }
-			\ }
 
 " NeoBundleの初期化終了
 call neobundle#end()
@@ -127,8 +125,7 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=jedi#completions
-autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python setlocal omnifunc=jedi#completions completeopt-=preview
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
@@ -172,6 +169,12 @@ let g:jedi#rename_command = ""
 
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
+let g:jedi#show_call_signatures = 0
+
+
+" Syntastic Settings
+let g:syntastic_python_python_exec = "/usr/bin/python3"
+let g:syntastic_python_checkers = ["python"]
 
 
 " 256色表示に変更
@@ -180,6 +183,9 @@ set t_Co=256
 colorscheme molokai
 " シンタックスカラーを有効にする
 syntax on
+
+" 背景を透明色にする
+highlight Normal ctermbg=none
 
 " カーソル行を強調表示
 set cursorline
