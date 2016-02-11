@@ -59,7 +59,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\[\e[0;36m\]${debian_chroot:+($debian_chroot)}\w\[\e[m\]\n\u@\h \$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -113,10 +113,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# User settings
-export PATH="$HOME/local/bin:$HOME/.cabal/bin:$PATH"
-
-# pyenv settings
+export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+if [ -d "${PYENV_ROOT}" ]; then
+	export PATH="$PYENV_ROOT/bin:"$PATH
+	eval "$(pyenv init -)"
+fi
+
+export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
