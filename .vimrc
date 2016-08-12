@@ -26,15 +26,18 @@ call dein#begin(s:dein_dir)
 
 call dein#add('Shougo/dein.vim')
 call dein#add('ctrlpvim/ctrlp.vim')
-call dein#add('scrooloose/syntastic')
 call dein#add('Shougo/neocomplete')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('itchyny/lightline.vim')
+call dein#add('Shougo/Unite.vim')
 call dein#add('tpope/vim-surround')
 call dein#add('thinca/vim-quickrun')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 call dein#add('davidhalter/jedi-vim', {'on_ft' : ['python', 'python3']})
+call dein#add('vim-jp/cpp-vim', {'on_ft' : ['cpp'] })
+call dein#add('osyo-manga/vim-watchdogs')
+call dein#add('osyo-manga/shabadou.vim')
 
 call dein#end()
 
@@ -43,50 +46,6 @@ if dein#check_install()
 endif
 
 filetype plugin indent on
-
-" NeoBundle Settings
-" if has('vim_starting')
-" 	filetype plugin off
-" 	filetype indent off
-" 	execute 'set runtimepath+=' . expand ('~/.vim/bundle/neobundle.vim')
-" endif
-" 
-" "NeoBundleの初期化
-" call neobundle#begin(expand('~/.vim/bundle'))
-" 
-" "Neobundle で Neobundleを管理
-" NeoBundleFetch 'Shougo/neobundle.vim'
-" 
-" " プラグインのインストール
-" NeoBundle 'ctrlpvim/ctrlp.vim'
-" NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'Shougo/neocomplete'
-" NeoBundle 'Shougo/neosnippet'
-" NeoBundle 'Shougo/neosnippet-snippets'
-" NeoBundle 'itchyny/lightline.vim'
-" NeoBundle 'tpope/vim-surround'
-" NeoBundle 'thinca/vim-quickrun'
-" NeoBundleLazy 'davidhalter/jedi-vim', {
-" 			\ "autoload" : {
-" 			\	"filetypes" : ["python", "python3"],
-" 			\	},
-" 			\}
-" 
-" NeoBundle 'Shougo/vimproc.vim', {
-" 			\ 'build' : {
-" 			\	'windows' : 'tools\\update-dll-mingw',
-" 			\	'cygwin' : 'make -f make_cygwin.mak',
-" 			\	'linux' : 'make',
-" 			\	}
-" 			\}
-" 
-" " NeoBundleの初期化終了
-" call neobundle#end()
-" 
-" "filetypeとインデントの有効化
-" filetype plugin indent on
-" 
-" NeoBundleCheck
 
 " Ctrlp settings
 let g:ctrlp_max_files = 100000
@@ -114,7 +73,7 @@ if has('conceal')
 endif
 
 " neocomplete settings
-" Diable AutoComplPop
+" Disable AutoComplPop
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -195,6 +154,16 @@ let g:quickrun_config ={
 \		"runner/vimproc/updatetime" : 60
 \	  },
 \}
+let g:quickrun_config.cpp = {
+\	"cmdopt" : "--std=c++11",
+\}
+
+" watchdogs settings
+call watchdogs#setup(g:quickrun_config)
+let g:watchdogs_check_BufWritePost_enables = {
+\	"cpp" : 1,
+\	"python" : 1,
+\}
 
 " jedi-vim settings
 command! -nargs=0 JediRename :call jedi#rename
@@ -207,20 +176,6 @@ let g:jedi#show_call_signatures = 0
 let g:jedi#force_py_version = 3
 
 inoremap <S-Space> g:jedi#completions_command
-
-
-" Syntastic Settings
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_python_python_exec = "/usr/bin/python3"
-let g:syntastic_python_checkers = ["python"]
-
-let g:syntastic_cpp_chekers = ["gcc"]
-let g:syntastic_cpp_compliler = 'g++'
-let g:syntastic_cpp_compliler_options = ' -std=c++11'
 
 " python-syntax setting
 let python_highlight_all = 1
