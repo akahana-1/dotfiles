@@ -1,0 +1,25 @@
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = ['python', 'python3']
+hook_add = '''
+	command! -nargs=0 JediRename :call jedi#rename
+	inoremap <S-Space> g:jedi#completions_command
+	let g:jedi#completions_enabled = 1
+	let g:jedi#auto_vim_configuration = 0
+	let g:jedi#force_py_version = 3
+	let g:jedi#show_call_signatures = 0
+	let g:jedi#rename_command = ""
+'''
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_ft = ['python', 'python3']
+depends = [ 'deoplete.nvim' ]
+
+[[plugins]]
+repo = 'vim-jp/cpp-vim'
+on_ft = ['cpp', 'hpp', 'cxx']
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'

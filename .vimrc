@@ -1,17 +1,24 @@
 " 設定ファイルのエンコーディング
 scriptencoding utf-8
 " Vi互換にしない
-set nocompatible
+if !has("nvim")
+	set nocompatible
+endif
 
 if has('win32')
 	set runtimepath+=$HOME/.vim
 	cd $HOME
 endif
 
-let $PATH = "~/.pyenv/shims/:".$PATH
-
-let s:dein_dir = expand('~/.vim')
-
+let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
+if has('nvim')
+	let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_HOME
+	let s:config_dir = s:config_home . '/nvim'
+else
+	let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.vim') : $XDG_CONFIG_HOME
+	let s:config_dir = s:config_home
+endif
+let s:dein_dir = s:cache_home . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# '/dein.vim'
@@ -21,25 +28,24 @@ if &runtimepath !~# '/dein.vim'
 	execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
+" Neovim python settings
+if has("nvim")
+	let g:python3_host_prog = $PYENV_ROOT . "/shims/python3"
+	let g:loaded_python_provider = 1
+	let g:python_host_skip_check = 1
+endif
 
-call dein#begin(s:dein_dir)
+let s:toml_file = s:config_dir . '/dein.toml'
+let s:toml_lazy_file = s:config_dir . '/dein_lazy.toml'
 
-call dein#add('Shougo/dein.vim')
-call dein#add('ctrlpvim/ctrlp.vim')
-call dein#add('Shougo/neocomplete')
-call dein#add('Shougo/neosnippet')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('itchyny/lightline.vim')
-call dein#add('Shougo/Unite.vim')
-call dein#add('tpope/vim-surround')
-call dein#add('thinca/vim-quickrun')
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('davidhalter/jedi-vim', {'on_ft' : ['python', 'python3']})
-call dein#add('vim-jp/cpp-vim', {'on_ft' : ['cpp'] })
-call dein#add('osyo-manga/vim-watchdogs')
-call dein#add('osyo-manga/shabadou.vim')
+if dein#load_state(s:dein_dir)
+	call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file, s:toml_lazy_file])
 
-call dein#end()
+	call dein#load_toml(s:toml_file, { 'lazy' : 0 })
+	call dein#load_toml(s:toml_lazy_file, { 'lazy' : 1 })
+
+	call dein#end()
+endif
 
 if dein#check_install()
 	call dein#install()
@@ -72,61 +78,78 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-" neocomplete settings
-" Disable AutoComplPop
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+if has("nvim")
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#max_list = 20
 
-" Define dictionaly.
-let g:neocomplete#sources#dictionary#dictionaries = {
-	\ 'default' : '',
-	\ 'vimshell' : $HOME.'/.vimshell_hist',
-	\ 'scheme' : $HOME.'/.gosh_completions'
-		\ }
+	" buffer completion pattern
+	let g:deoplete#keyword_patterns = {}
+	let g:deoplete#keyword_patterns.tex = '\\?[a-zA-Z_]\w*'
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-	let g:neocomplete#keyword_patterns = {}
+	" omni completion pattern
+	let g:deoplete#omni_patterns = {}
+	let g:deoplete#omni_patterns.python = '\h\w*\|[^. \t]\.\w*'
+	let g:deoplete#omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+else
+
+	" neocomplete settings
+	" Disable AutoComplPop
+	let g:acp_enableAtStartup = 0
+	" Use neocomplete.
+	let g:neocomplete#enable_at_startup = 1
+	" Use smartcase.
+	let g:neocomplete#enable_smart_case = 1
+	" Set minimum syntax keyword length.
+	let g:neocomplete#sources#syntax#min_keyword_length = 3
+	let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+	" Define dictionaly.
+	let g:neocomplete#sources#dictionary#dictionaries = {
+		\ 'default' : '',
+		\ 'vimshell' : $HOME.'/.vimshell_hist',
+		\ 'scheme' : $HOME.'/.gosh_completions'
+			\ }
+
+	" Define keyword.
+	if !exists('g:neocomplete#keyword_patterns')
+		let g:neocomplete#keyword_patterns = {}
+	endif
+	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+	" Plugin key-mappings.
+	inoremap <expr><C-g>	neocomplete#undo_completion()
+	inoremap <expr><C-l>	neocomplete#complete_common_string()
+
+	" Recommended key-mappings.
+	" <CR>: close popup and save indent.
+	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	function! s:my_cr_function()
+		return neocomplete#close_popup() . "\<CR>"
+	endfunction
+	" <TAB>: completion.
+	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+	" <C-h>, <BS>: close popup and delete backword char.
+	inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><C-y> neocomplete#close_popup()
+	inoremap <expr><C-e> neocomplete#cancel_popup()
+
+
+	" Enable heavy omni completion.
+	if !exists('g:neocomplete#sources#omni#input_patterns')
+		let g:neocomplete#sources#omni#input_patterns = {}
+	endif
+
+	let g:neocomplete#sources#omni#input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+	let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>	neocomplete#undo_completion()
-inoremap <expr><C-l>	neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-	return neocomplete#close_popup() . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
 
 "Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=jedi#completions completeopt-=preview
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-	let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-let g:neocomplete#sources#omni#input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal completeopt-=preview
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " lightline settings
 if has('unix')
@@ -177,16 +200,14 @@ let g:jedi#force_py_version = 3
 
 inoremap <S-Space> g:jedi#completions_command
 
-" python-syntax setting
-let python_highlight_all = 1
-
-
 " 256色表示に変更
-set t_Co=256
+if !has("nvim")
+	set t_Co=256
+endif
 " カラースキームを有効にする
 colorscheme molokai
 " シンタックスカラーを有効にする
-syntax on
+syntax enable
 
 " 背景を透明色にする
 highlight Normal ctermbg=none
@@ -194,7 +215,9 @@ highlight Normal ctermbg=none
 " カーソル行を強調表示
 set cursorline
 " 内部エンコーディングを設定
-set encoding=utf-8
+if !has("nvim")
+	set encoding=utf-8
+endif
 set fileencoding=utf-8
 " スワップファイルを作成しない
 set noswapfile
@@ -236,8 +259,6 @@ set laststatus=2
 set cmdheight=2
 " ビジュアルベルを使わない
 set visualbell t_vb=
-" ビジュアルベルの無効化
-" set t_vb=
 " エラーベルの無効化
 set noerrorbells
 
@@ -304,10 +325,3 @@ set fileformats=unix,dos,mac
 " Other Settings
 " TeXファイルの認識
 let g:tex_flavor = "latex"
-" My autocmd setting
-augroup MyAutoGroup
-	autocmd!
-	" md as markdown, instead of modula2 (thanks to @kotatsu_mi)
-	autocmd MyAutoGroup BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set ft=markdown
-augroup END
-
