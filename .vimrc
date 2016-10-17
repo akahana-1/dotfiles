@@ -30,11 +30,12 @@ endif
 
 " Neovim python settings
 if has("nvim")
-	let g:python3_host_prog = $PYENV_ROOT . "/shims/python3"
-	let g:loaded_python_provider = 1
 	let g:python_host_skip_check = 1
+	let g:loaded_python_provider = 1
+	let g:python3_host_prog = $PYENV_ROOT . "/versions/neovim3/bin/python"
 endif
 
+" dein settings
 let s:toml_file = s:config_dir . '/dein.toml'
 let s:toml_lazy_file = s:config_dir . '/dein_lazy.toml'
 
@@ -51,13 +52,13 @@ if dein#check_install()
 	call dein#install()
 endif
 
+
 filetype plugin indent on
 
 " Ctrlp settings
-let g:ctrlp_max_files = 100000
-let g:ctrlp_max_depth = 10
-
 nnoremap <silent> <space><C-p> :CtrlPMRU<CR>
+
+let g:ctrlp_working_path_mode = 'ra'
 
 " neosnippet settings
 " Plugin key-mappings.
@@ -87,9 +88,19 @@ if has("nvim")
 	let g:deoplete#keyword_patterns.tex = '\\?[a-zA-Z_]\w*'
 
 	" omni completion pattern
-	let g:deoplete#omni_patterns = {}
-	let g:deoplete#omni_patterns.python = '\h\w*\|[^. \t]\.\w*'
-	let g:deoplete#omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+	let g:deoplete#omni#input_patterns = {}
+	let g:deoplete#omni#input_patterns.python = '[a-zA-Z_]\w*\|[^. \t]\.\w*'
+	let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|[a-zA-Z_]\w*::'
+
+	" <C-h>, <BS>: close popup and delete backword char.
+	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+
+	" <CR>: close popup and save indent.
+	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	function! s:my_cr_function() abort
+	  return deoplete#close_popup() . "\<CR>"
+	endfunction
 else
 
 	" neocomplete settings
@@ -179,26 +190,21 @@ let g:quickrun_config ={
 \}
 let g:quickrun_config.cpp = {
 \	"cmdopt" : "--std=c++11",
+\	"watchdogs_checker/_" : {
+\		'outputter/quickfix/open_cmd' : '',
+\		'hook/close_quickfix/enable_exit' : 1,
+\	},
+\}
+let g:quickrun_config.python = {
+\	"command" : "python3",
 \}
 
 " watchdogs settings
 call watchdogs#setup(g:quickrun_config)
 let g:watchdogs_check_BufWritePost_enables = {
-\	"cpp" : 1,
 \	"python" : 1,
+\	"cpp" : 1
 \}
-
-" jedi-vim settings
-command! -nargs=0 JediRename :call jedi#rename
-
-let g:jedi#rename_command = ""
-
-let g:jedi#completions_enabled = 1
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#force_py_version = 3
-
-inoremap <S-Space> g:jedi#completions_command
 
 " 256色表示に変更
 if !has("nvim")

@@ -3,6 +3,10 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+	let g:ctrlp_max_files = 1000
+	let g:ctrlp_max_depth = 10
+'''
 
 [[plugins]]
 repo = 'Shougo/neocomplete'
