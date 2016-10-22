@@ -3,10 +3,6 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-	let g:ctrlp_max_files = 1000
-	let g:ctrlp_max_depth = 10
-'''
 
 [[plugins]]
 repo = 'Shougo/neocomplete'
@@ -40,3 +36,6 @@ repo = 'osyo-manga/vim-watchdogs'
 
 [[plugins]]
 repo = 'osyo-manga/shabadou.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'

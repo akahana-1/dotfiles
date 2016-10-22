@@ -17,9 +17,11 @@ endif
 runtime! rc/init/*.vim
 runtime! rc/plugins/*.vim
 
-colorscheme molokai
 " 背景を透明色にする
-highlight Normal ctermbg=none
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none
+
+colorscheme molokai
 
 " Other Settings
 " TeXファイルの認識

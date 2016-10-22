@@ -3,7 +3,7 @@ syntax enable
 " カーソル行を強調表示
 set cursorline
 " 内部エンコーディングを設定
-set encoding=utf-8
+" set encoding=utf-8
 set fileencoding=utf-8
 " スワップファイルを作成しない
 set noswapfile

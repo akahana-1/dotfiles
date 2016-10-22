@@ -20,6 +20,7 @@ if has("nvim")
 	function! s:my_cr_function() abort
 	  return deoplete#close_popup() . "\<CR>"
 	endfunction
+
 endif
 
 autocmd FileType python setlocal completeopt-=preview
