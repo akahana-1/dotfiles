@@ -1,6 +1,6 @@
 if has("nvim")
 	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#max_list = 20
+	let g:deoplete#max_list = 30
 
 	" buffer completion pattern
 	let g:deoplete#keyword_patterns = {}
@@ -15,12 +15,15 @@ if has("nvim")
 	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 	inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
+	" <Tab> <S-Tab>: move next or previous match
+	inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+	inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 	" <CR>: close popup and save indent.
 	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 	function! s:my_cr_function() abort
 	  return deoplete#close_popup() . "\<CR>"
 	endfunction
-
 endif
 
 autocmd FileType python setlocal completeopt-=preview
