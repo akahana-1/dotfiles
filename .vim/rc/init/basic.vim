@@ -1,7 +1,7 @@
 " シンタックスカラーを有効にする
 syntax enable
-" カーソル行を強調表示
-set cursorline
+" カーソル行を強調表示しない
+set nocursorline
 " 内部エンコーディングを設定
 " set encoding=utf-8
 set fileencoding=utf-8
@@ -15,8 +15,8 @@ set confirm
 set ruler
 " 行番号を表示する
 set number
-" タイトルを開いているファイル名にする
-set title
+" タイトルを開いているファイル名にしない
+set notitle
 " 自動改行の無効化
 set textwidth=0
 " タブ幅の設定
