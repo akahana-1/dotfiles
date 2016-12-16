@@ -10,6 +10,10 @@ if has("nvim")
 	let g:deoplete#omni#input_patterns = {}
 	let g:deoplete#omni#input_patterns.python = '[a-zA-Z_]\w*\|[^. \t]\.\w*'
 	let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|[a-zA-Z_]\w*::'
+	let g:deoplete#omni#input_patterns.tex = '\\('
+		\.'\w*cite\w*(\s*\[[^]]*\]){0,2}\s*{[^}]*'
+		\.'|\w*ref(\s*\{[^}]*|range\s*\{[^,}]*(}{)?)'
+		\.')'
 
 	" <C-h>, <BS>: close popup and delete backword char.
 	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
