@@ -39,3 +39,6 @@ repo = 'osyo-manga/shabadou.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
