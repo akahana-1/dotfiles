@@ -24,3 +24,7 @@ on_ft = ['python', 'python3']
 [[plugins]]
 repo = 'lervag/vimtex'
 on_ft = ['tex', 'latex', 'bib']
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rust']
