@@ -1,5 +1,13 @@
 PS1='\[\e[0;36m\]${debian_chroot:+($debian_chroot)}\w\[\e[m\]\n\u@\h \$ '
 
+if [ -d "$HOME/.cargo" ]; then
+	source $HOME/.cargo/env
+	export RUST_SRC_PATH=$HOME/.multirust/toolchains/$(\
+		rustup toolchain list |\
+		grep default |\
+		cut -d' ' -f 1 -)/lib/rustlib/src/rust/src
+fi
+
 export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 
