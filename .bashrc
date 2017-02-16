@@ -1,4 +1,16 @@
-PS1='\[\e[0;36m\]${debian_chroot:+($debian_chroot)}\w\[\e[m\]\n\u@\h \$ '
+parse_git_branch()
+{
+	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/ [\1]/'
+}
+
+promps(){
+	local dir_color="\[\e[0;36m\]"
+	local repo_color="\[\e[1;36m\]"
+	local cmd_color="\[\e[0;00m\]"
+	PS1="${dir_color}${debian_chroot:+($debian_chroot)}\w${repo_color}\$(parse_git_branch)${cmd_color}\n\u@\h \$ "
+}
+
+promps
 
 if [ -d "$HOME/.cargo" ]; then
 	source $HOME/.cargo/env
