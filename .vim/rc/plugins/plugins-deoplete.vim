@@ -2,6 +2,8 @@ if has("nvim")
 	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#max_list = 30
 
+"	let g:deoplete#sources.cpp = ['buffer', 'tag']
+
 	" buffer completion pattern
 	let g:deoplete#keyword_patterns = {}
 	let g:deoplete#keyword_patterns.tex = '\\?[a-zA-Z_]\w*'
@@ -9,7 +11,7 @@ if has("nvim")
 	" omni completion pattern
 	let g:deoplete#omni#input_patterns = {}
 	let g:deoplete#omni#input_patterns.python = '[a-zA-Z_]\w*\|[^. \t]\.\w*'
-	let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|[a-zA-Z_]\w*::'
+	let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%\(\.\|->\)\|[a-zA-Z_]\w*::'
 	let g:deoplete#omni#input_patterns.tex = '\\('
 		\.'\w*cite\w*(\s*\[[^]]*\]){0,2}\s*{[^}]*'
 		\.'|\w*ref(\s*\{[^}]*|range\s*\{[^,}]*(}{)?)'
