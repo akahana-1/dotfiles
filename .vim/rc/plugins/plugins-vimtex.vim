@@ -1,6 +1,6 @@
 let g:tex_flavor = "latex"
 
-" deprecated options sinc 2017-03-28
+" deprecated options since 2017-03-28
 " let g:vimtex_latexmk_options = '-pdfdvi'
 
 let g:vimtex_compiler_latexmk = {
