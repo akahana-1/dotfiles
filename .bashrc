@@ -12,19 +12,12 @@ promps(){
 
 promps
 
-if [ -d "$HOME/.cargo" ]; then
-	source $HOME/.cargo/env
-	export RUST_SRC_PATH=$HOME/.multirust/toolchains/$(\
-		rustup toolchain list |\
-		grep default |\
-		cut -d' ' -f 1 -)/lib/rustlib/src/rust/src
-fi
+[[ -z $TMUX ]] && export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 
-export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 export PYENV_ROOT="$HOME/.pyenv"
+[[ -z $TMUX ]] && export PATH="$PYENV_ROOT/bin:"$PATH
 
-if [ -d "${PYENV_ROOT}" ]; then
-	export PATH="$PYENV_ROOT/bin:"$PATH
+if [[ -z $TMUX ]] && command -v pyenv 1> /dev/null 2>&1; then
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
 fi
