@@ -42,3 +42,8 @@ repo = 'tomasr/molokai'
 
 [[plugins]]
 repo = 'vim-syntastic/syntastic'
+if = ''' !has("nvim") '''
+
+[[plugins]]
+repo = 'neomake/neomake'
+if = ''' has("nvim") '''
