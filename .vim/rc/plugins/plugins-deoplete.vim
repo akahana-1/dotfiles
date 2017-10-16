@@ -1,5 +1,7 @@
 if has("nvim")
-	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#enable_at_startup = 0
+	autocmd InsertEnter * call deoplete#enable()
+
 	let g:deoplete#max_list = 30
 
 "	let g:deoplete#sources.cpp = ['buffer', 'tag']
