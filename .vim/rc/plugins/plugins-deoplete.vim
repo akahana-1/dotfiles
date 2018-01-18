@@ -14,10 +14,22 @@ if has("nvim")
 	let g:deoplete#omni#input_patterns = {}
 	let g:deoplete#omni#input_patterns.python = '[a-zA-Z_]\w*\|[^. \t]\.\w*'
 	let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%\(\.\|->\)\|[a-zA-Z_]\w*::'
-	let g:deoplete#omni#input_patterns.tex = '\\('
-		\.'\w*cite\w*(\s*\[[^]]*\]){0,2}\s*{[^}]*'
-		\.'|\w*ref(\s*\{[^}]*|range\s*\{[^,}]*(}{)?)'
-		\.')'
+	" autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+	" let g:deoplete#omni#input_patterns.tex = '\\(?:'
+    "   \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+    "   \ . '|(text|block)cquote\*?(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+    "   \ . '|(for|hy)\w*cquote\*?{[^}]*}(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+    "   \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+    "   \ . '|hyperref\s*\[[^]]*'
+    "   \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+    "   \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+    "   \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+    "   \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+    "   \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+    "   \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+    "   \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+    "   \ . '|\w*'
+    "   \ .')'
 
 	" <C-h>, <BS>: close popup and delete backword char.
 	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
