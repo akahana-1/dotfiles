@@ -45,5 +45,9 @@ repo = 'vim-syntastic/syntastic'
 if = ''' !has("nvim") '''
 
 [[plugins]]
-repo = 'neomake/neomake'
+repo = 'w0rp/ale'
 if = ''' has("nvim") '''
+
+# [[plugins]]
+# repo = 'neomake/neomake'
+# if = ''' has("nvim") '''
