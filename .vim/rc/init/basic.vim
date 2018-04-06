@@ -48,6 +48,11 @@ set visualbell t_vb=
 " エラーベルの無効化
 set noerrorbells
 
+" エンコードの認識対象
+set fileencodings=utf-8,cp932,euc-jp,iso-2022-jp-3,latin1
+" 改行コードの自動認識
+set fileformats=unix,dos,mac
+
 " 無限Undoの実現
 if has('persistent_undo')
 	set undodir=~/.vim/undo
