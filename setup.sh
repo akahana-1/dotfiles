@@ -10,7 +10,7 @@ fi
 
 # echo "CONFIG HOME : " ${CONFIG_HOME}
 
-[[ -d ${CONFIG_HOME} ]] && mkdir -p ${CONFIG_HOME}
+[[ -d ${CONFIG_HOME} ]] || mkdir -p ${CONFIG_HOME}
 
 if type nvim > /dev/null 2>&1; then
 	EDITOR_TARGET="nvim"
