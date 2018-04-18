@@ -27,7 +27,27 @@ deduplication(){
 	fi
 }
 
+venvenable(){
+	_PASSING=$PWD
+	if [[ -z "$VIRTUAL_ENV" ]]; then
+		while :
+		do
+			if [[ "$PWD" = "/" ]]; then
+				break
+			fi
+			if [[ -f "pyvenv.cfg" ]]; then
+				source bin/activate
+				break
+			fi
+			cd ../
+		done
+	fi
+	cd $_PASSING
+}
+
 promps
+
+PROMPT_COMMAND=venvenable
 
 [[ -z $TMUX ]] && export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 
@@ -36,7 +56,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 
 if [[ -z $TMUX ]] && command -v pyenv 1> /dev/null 2>&1; then
 	eval "$(pyenv init -)"
-	# eval "$(pyenv virtualenv-init -)"
+	eval "$(pyenv virtualenv-init -)"
 fi
 
 export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
