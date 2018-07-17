@@ -10,6 +10,7 @@ let g:ale_lint_on_text_changed = "never"
 let g:ale_linters = {
 		\ "python": ["flake8"],
 		\ }
+let g:ale_linters_explicit = 1
 
 " for python3
 let g:ale_python_flake8_executable = $HOME . "/usr/local/bin/flake8"
