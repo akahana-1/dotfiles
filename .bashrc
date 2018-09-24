@@ -47,12 +47,12 @@ venvenable(){
 
 promps
 
-PROMPT_COMMAND=venvenable
+# PROMPT_COMMAND=venvenable
 
-[[ -z $TMUX ]] && export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
+export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -z $TMUX && -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:"$PATH
+[[ -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:"$PATH
 
 if [[ -z $TMUX ]] && command -v pyenv 1> /dev/null 2>&1; then
 	eval "$(pyenv init -)"
@@ -60,5 +60,10 @@ if [[ -z $TMUX ]] && command -v pyenv 1> /dev/null 2>&1; then
 fi
 
 export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
+export HISTTIMEFORMAT="%F %T "
+
+export GOPATH=$HOME/go
+
+[[ -d $GOPATH ]] && export PATH="$GOPATH/bin:"$PATH
 
 deduplication
