@@ -1,5 +1,3 @@
+" deoplete-jedi は $PATH から見える Python の sys.path に jediを追加するので
+" 他のライブラリの設定はPATHから見えてる Python に準ずる
 let g:deoplete#sources#jedi#python_path = $PYENV_ROOT . "/shims/python"
-" let g:deoplete#sources#jedi#extra_path = [
-" 	\ $PYENV_ROOT . "/versions/miniconda3-latest/lib/python3.6",
-" 	\ $PYENV_ROOT . "/versions/miniconda3-latest/lib/python3.6/site-packages",
-" 	\ ]
