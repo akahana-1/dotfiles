@@ -25,14 +25,28 @@ on_ft = ['python', 'python3']
 repo = 'lervag/vimtex'
 on_ft = ['tex', 'latex', 'bib']
 
-[[plugins]]
-repo = 'rust-lang/rust.vim'
-on_ft = ['rust']
+# [[plugins]]
+# repo = 'rust-lang/rust.vim'
+# on_ft = ['rust']
+
+# [[plugins]]
+# repo = 'racer-rust/vim-racer'
+# on_ft = ['rust']
 
 [[plugins]]
-repo = 'racer-rust/vim-racer'
-on_ft = ['rust']
+repo = 'zchee/deoplete-go'
+on_ft = ['go']
+build = 'make'
 
 [[plugins]]
 repo = 'kannokanno/previm'
 on_ft = ['markdown']
+
+[[plugins]]
+repo = "mhartington/nvim-typescript"
+on_ft = ["typescript"]
+build = "./install.sh"
+
+[[plugins]]
+repo = "HerringtonDarkholme/yats.vim"
+on_ft = ["typescript"]
