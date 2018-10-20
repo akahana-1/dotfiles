@@ -58,3 +58,12 @@ if has('persistent_undo')
 	set undodir=~/.vim/undo
 	set undofile
 endif
+
+" ファイルタイプごとのインデント設定
+augroup filetypeIndent
+	autocmd!
+	autocmd BufNewFile,BufRead *.yaml,*.yml setlocal tabstop=2 shiftwidth=2 
+	autocmd BufNewFile,BufRead *.ts,*.js setlocal expandtab tabstop=2 shiftwidth=2
+	autocmd BufNewFile,BufRead *.html setlocal tabstop=2 shiftwidth=2
+	autocmd FileType json setlocal expandtab tabstop=2 shiftwidth=2
+augroup END
