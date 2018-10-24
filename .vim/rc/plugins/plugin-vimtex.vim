@@ -15,5 +15,8 @@ let g:vimtex_compiler_latexmk = {
 \ ],
 \}
 
+let g:vimtex_compiler_latexmk_engines = {
+	\ '_' : '-pdfdvi',
+	\}
 " reference : https://github.com/lervag/vimtex/issues/773#issuecomment-297371661
 let g:vimtex_quickfix_latexlog = {'fix_paths' : 0}
