@@ -41,4 +41,8 @@ fi
 
 export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
 
+export GOPATH=$HOME/go
+
+[[ -d $GOPATH ]] && export PATH="$GOPATH/bin:"$PATH
+
 deduplication
