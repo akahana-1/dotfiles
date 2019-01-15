@@ -45,4 +45,6 @@ export GOPATH=$HOME/go
 
 [[ -d $GOPATH ]] && export PATH="$GOPATH/bin:"$PATH
 
+[[ -d $HOME/.gem/ ]] && export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+
 deduplication
