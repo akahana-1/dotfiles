@@ -27,6 +27,24 @@ deduplication(){
 	fi
 }
 
+venvenable(){
+	_PASSING=$PWD
+	if [[ -z "$VIRTUAL_ENV" ]]; then
+		while :
+		do
+			if [[ "$PWD" = "/" ]]; then
+				break
+			fi
+			if [[ -f "pyvenv.cfg" ]]; then
+				source bin/activate
+				break
+			fi
+			cd ../
+		done
+	fi
+	cd $_PASSING
+}
+
 promps
 
 export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
@@ -40,5 +58,10 @@ if command -v pyenv 1> /dev/null 2>&1; then
 fi
 
 export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
+export HISTTIMEFORMAT="%F %T "
+
+export GOPATH=$HOME/go
+
+[[ -d $GOPATH ]] && export PATH="$GOPATH/bin:"$PATH
 
 deduplication

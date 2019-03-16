@@ -25,6 +25,7 @@ nnoremap <SID>[denite] <Nop>
 nmap <Space>d <SID>[denite]
 
 nnoremap <silent> <SID>[denite]d :<C-u> Denite file_rec buffer file_old<CR>
-nnoremap <silent> <SID>[denite]f :<C-u>Denite file_rec<CR>
+nnoremap <silent> <SID>[denite]/ :<C-u>Denite file_rec<CR>
 nnoremap <silent> <SID>[denite]b :<C-u>Denite buffer<CR>
 nnoremap <silent> <SID>[denite]g :<C-u>Denite grep<CR>
+nnoremap <silent> <SID>[denite]; :<C-u>Denite -resume<CR>
