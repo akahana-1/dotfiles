@@ -4,7 +4,7 @@ on_ft = ['python', 'python3']
 if = ''' !has("nvim") '''
 
 [[plugins]]
-repo = 'zchee/deoplete-jedi'
+repo = 'deoplete-plugins/deoplete-jedi'
 if = ''' has("nvim") '''
 on_ft = ['python', 'python3']
 depends = [ 'deoplete.nvim' ]
