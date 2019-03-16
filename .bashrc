@@ -29,14 +29,14 @@ deduplication(){
 
 promps
 
-[[ -z $TMUX ]] && export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
+export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
 
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -z $TMUX && -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:"$PATH
+[[ -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:"$PATH
 
-if [[ -z $TMUX ]] && command -v pyenv 1> /dev/null 2>&1; then
+if command -v pyenv 1> /dev/null 2>&1; then
 	eval "$(pyenv init -)"
-	# eval "$(pyenv virtualenv-init -)"
+	eval "$(pyenv virtualenv-init -)"
 fi
 
 export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
