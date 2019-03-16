@@ -13,5 +13,5 @@ if has("nvim")
 	let g:python_host_skip_check = 1
 	let g:python3_host_skip_check = 0
 	let g:loaded_python_provider = 1
-	let g:python3_host_prog = $HOME . "/.config/neovim3/bin/python3"
+	let g:python3_host_prog = $PYENV_ROOT . "/versions/neovim3/bin/python3"
 endif
