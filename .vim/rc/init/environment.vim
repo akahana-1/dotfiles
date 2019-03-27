@@ -1,8 +1,3 @@
-" Vi互換にしない
-if !has("nvim")
-	set nocompatible
-endif
-
 if has('win32') || has('win64')
 	set runtimepath+=$HOME/.vim
 	cd $HOME

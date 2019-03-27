@@ -59,6 +59,11 @@ if has('persistent_undo')
 	set undofile
 endif
 
+" Vi互換にしない
+if !has("nvim")
+	set nocompatible
+endif
+
 " ファイルタイプごとのインデント設定
 augroup filetypeIndent
 	autocmd!
