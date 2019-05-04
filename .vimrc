@@ -19,3 +19,4 @@ colorscheme molokai
 let g:tex_flavor = "latex"
 
 filetype plugin indent on
+syntax enable

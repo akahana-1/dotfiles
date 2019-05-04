@@ -1,5 +1,5 @@
 " シンタックスカラーを有効にする
-syntax enable
+" syntax enable
 " カーソル行を強調表示しない
 set nocursorline
 " 内部エンコーディングを設定
