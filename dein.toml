@@ -2,9 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
 repo = 'Shougo/neocomplete'
 if = '''!has('nvim')'''
 
@@ -47,7 +44,3 @@ if = ''' !has("nvim") '''
 [[plugins]]
 repo = 'w0rp/ale'
 if = ''' has("nvim") '''
-
-# [[plugins]]
-# repo = 'neomake/neomake'
-# if = ''' has("nvim") '''

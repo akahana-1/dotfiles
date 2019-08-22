@@ -40,7 +40,7 @@ build = 'make'
 
 [[plugins]]
 repo = 'kannokanno/previm'
-on_ft = ['markdown']
+on_ft = ['markdown', 'asciidoc']
 
 [[plugins]]
 repo = "mhartington/nvim-typescript"
