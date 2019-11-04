@@ -34,7 +34,7 @@ promps
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -z $TMUX && -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:"$PATH
 
-if [[ -z $TMUX ]] && command -v pyenv 1> /dev/null 2>&1; then
+if command -v pyenv 1> /dev/null 2>&1; then
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
 fi
@@ -44,7 +44,5 @@ export TEXMFCNF="$HOME/.texmf-config/web2c":$TEXMFCNF
 export GOPATH=$HOME/go
 
 [[ -d $GOPATH ]] && export PATH="$GOPATH/bin:"$PATH
-
-[[ -d $HOME/.gem/ ]] && export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
 
 deduplication
