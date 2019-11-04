@@ -30,6 +30,7 @@ build = 'make'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+if = '''has("python3")'''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
