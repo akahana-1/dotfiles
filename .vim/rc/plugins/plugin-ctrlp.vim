@@ -1,6 +1,3 @@
-" Ctrlp settings
-nnoremap <silent> <Leader>r :CtrlPMRU<CR>
-
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_show_hidden = 0
 

@@ -10,6 +10,7 @@ let g:ale_lint_on_text_changed = "never"
 let g:ale_linters = {
 		\ "python": ["flake8"],
 		\ "go": ["gofmt", "govet"],
+		\ "typescript": ["tslint"],
 		\ }
 let g:ale_linters_explicit = 1
 
