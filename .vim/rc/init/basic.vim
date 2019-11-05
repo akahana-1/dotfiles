@@ -59,6 +59,10 @@ if has('persistent_undo')
 	set undofile
 endif
 
+" leaderを<Space>に
+let mapleader = "\<space>"
+let maplocalleader = "\<space>"
+
 " Vi互換にしない
 if !has("nvim")
 	set nocompatible

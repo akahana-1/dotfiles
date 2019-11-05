@@ -25,7 +25,7 @@ endfunction
 " Hack Sample : http://vim-jp.org/vim-users-jp/2009/08/19/Hack-59.html
 "             : http://vim-jp.org/vim-users-jp/2010/05/04/Hack-144.html
 nnoremap <SID>[denite] <Nop>
-nmap <Space>d <SID>[denite]
+nmap <Leader>d <SID>[denite]
 
 nnoremap <silent> <SID>[denite]d :<C-u>Denite -start-filter file/rec buffer file/old<CR>
 nnoremap <silent> <SID>[denite]f :<C-u>Denite -start-filter file/rec<CR>
