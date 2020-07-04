@@ -27,24 +27,6 @@ deduplication(){
 	fi
 }
 
-venvenable(){
-	_PASSING=$PWD
-	if [[ -z "$VIRTUAL_ENV" ]]; then
-		while :
-		do
-			if [[ "$PWD" = "/" ]]; then
-				break
-			fi
-			if [[ -f "pyvenv.cfg" ]]; then
-				source bin/activate
-				break
-			fi
-			cd ../
-		done
-	fi
-	cd $_PASSING
-}
-
 promps
 
 export PATH="$HOME/usr/local/bin:$HOME/.cabal/bin":$PATH
@@ -63,5 +45,7 @@ export HISTTIMEFORMAT="%F %T "
 export GOPATH=$HOME/go
 
 [[ -d $GOPATH ]] && export PATH="$GOPATH/bin:"$PATH
+
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 deduplication

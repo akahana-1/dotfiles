@@ -25,32 +25,37 @@ on_ft = ['python', 'python3']
 repo = 'lervag/vimtex'
 on_ft = ['tex', 'latex', 'bib']
 
-# [[plugins]]
-# repo = 'rust-lang/rust.vim'
-# on_ft = ['rust']
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rust']
+if = '''executable("rustc")'''
 
-# [[plugins]]
-# repo = 'racer-rust/vim-racer'
-# on_ft = ['rust']
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+on_ft = ['rust']
+if = '''executable("rustc")'''
 
-# [[plugins]]
-# repo = 'deoplete-plugins/deoplete-go'
-# on_ft = ['go']
-# build = 'make'
-# hook_post_source = '''
-# let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-# let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-# '''
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-go'
+on_ft = ['go']
+build = 'make'
+if = '''executable("go")'''
+hook_post_source = '''
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+'''
 
 [[plugins]]
 repo = 'kannokanno/previm'
 on_ft = ['markdown']
 
-# [[plugins]]
-# repo = "mhartington/nvim-typescript"
-# on_ft = ["typescript"]
-# build = "./install.sh"
+[[plugins]]
+repo = "mhartington/nvim-typescript"
+on_ft = ["typescript"]
+build = "./install.sh"
+if = '''executable("node")'''
 
-# [[plugins]]
-# repo = "HerringtonDarkholme/yats.vim"
-# on_ft = ["typescript"]
+[[plugins]]
+repo = "HerringtonDarkholme/yats.vim"
+on_ft = ["typescript"]
+if = '''executable("node")'''

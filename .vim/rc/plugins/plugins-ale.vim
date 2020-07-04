@@ -12,5 +12,5 @@ let g:ale_linters = {
 		\ }
 
 " for python3
-let g:ale_python_flake8_executable = $HOME . "/usr/local/bin/flake8"
+let g:ale_python_flake8_executable = $HOME . "/.local/bin/flake8"
 let g:ale_python_flake8_use_global = 1
