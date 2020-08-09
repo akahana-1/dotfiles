@@ -2,19 +2,27 @@ if has("nvim")
 	let g:deoplete#enable_at_startup = 0
 	autocmd InsertEnter * call deoplete#enable()
 
-	let g:deoplete#max_list = 30
+	" let g:deoplete#max_list = 30
+	call deoplete#custom#var('max_list', 30)
 
-"	let g:deoplete#sources.cpp = ['buffer', 'tag']
 
 	" buffer completion pattern
-	let g:deoplete#keyword_patterns = {}
-	let g:deoplete#keyword_patterns.tex = '\\?[a-zA-Z_]\w*'
+	" let g:deoplete#keyword_patterns = {}
+	" let g:deoplete#keyword_patterns.tex = '\\?[a-zA-Z_]\w*'
+	call deoplete#custom#option('keyword_patterns', {
+		\ 'tex': '\\?[a-zA-Z_]\w*',
+		\})
 
 	" omni completion pattern
-	let g:deoplete#omni#input_patterns = {}
-	let g:deoplete#omni#input_patterns.python = '[a-zA-Z_]\w*\|[^. \t]\.\w*'
-	let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%\(\.\|->\)\|[a-zA-Z_]\w*::'
-	autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+	call deoplete#custom#var('omni', 'input_patterns', {
+		\ 'python':  '[a-zA-Z_]\w*\|[^. \t]\.\w*',
+		\ 'cpp':  '[^.[:digit:] *\t]\%\(\.\|->\)\|[a-zA-Z_]\w*::'
+		\ })
+	autocmd FileType tex call deoplete#custom#var('omni', 'input_patterns', { 'tex': g:vimtex#re#deoplete })
+	" let g:deoplete#omni#input_patterns = {}
+	" let g:deoplete#omni#input_patterns.python = '[a-zA-Z_]\w*\|[^. \t]\.\w*'
+	" let g:deoplete#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%\(\.\|->\)\|[a-zA-Z_]\w*::'
+	" autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 	" <C-h>, <BS>: close popup and delete backword char.
 	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
