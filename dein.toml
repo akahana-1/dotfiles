@@ -45,3 +45,6 @@ if = ''' !has("nvim") '''
 [[plugins]]
 repo = 'w0rp/ale'
 if = ''' has("nvim") '''
+
+[[plugins]]
+repo = 'aaronbieber/vim-quicktask'

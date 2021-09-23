@@ -43,6 +43,10 @@ repo = 'kannokanno/previm'
 on_ft = ['markdown', 'asciidoc']
 
 [[plugins]]
+repo = 'habamax/vim-asciidoctor'
+on_ft = ['asciidoc']
+
+[[plugins]]
 repo = "mhartington/nvim-typescript"
 on_ft = ["typescript"]
 build = "./install.sh"
